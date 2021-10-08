@@ -20,7 +20,6 @@ The steps described in this guide are as follows:
 * Configure X-Windows for use with the Nextflow Console
 * Install and Configure GIT
 
-<a id="install_powershell"></a>
 ## Install Windows PowerShell
 
 PowerShell is a cross-platform command-line shell and scripting language available for Windows, Linux, and macOS. If you are an experienced Windows user, you are probably already familiar with PowerShell. PowerShell is worth taking a few minutes to download and install. 
