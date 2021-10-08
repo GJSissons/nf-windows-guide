@@ -1,4 +1,4 @@
-# Setting up a Nextflow Development and Runtime Environments on Windows
+# Setting up a Nextflow Development and Runtime Environment on Windows
 
 For Windows users, getting access to a Linux-based Nextflow development and runtime environment used to be hard. Users would need to run virtual machines, access separate physical servers or cloud instances, or install packages such as [Cygwin](http://www.cygwin.com/) or [Wubi](https://wiki.ubuntu.com/WubiGuide). Fortunately, there is now an easier way to deploy a complete Nextflow development environment on Windows. 
 
@@ -20,6 +20,7 @@ The steps described in this guide are as follows:
 * Configure X-Windows for use with the Nextflow Console
 * Install and Configure GIT
 
+<a id="install_powershell"></a>
 ## Install Windows PowerShell
 
 PowerShell is a cross-platform command-line shell and scripting language available for Windows, Linux, and macOS. If you are an experienced Windows user, you are probably already familiar with PowerShell. PowerShell is worth taking a few minutes to download and install. 
@@ -36,7 +37,7 @@ PowerShell is a big improvement over the Command Prompt in Windows 10. It brings
 
 Make sure you are running Windows 10 Version 1903 with Build 18362 or higher. You can check your Windows version by select WIN-R (using the Windows key to run a command) and running the utility *winver*. 
 
-From within PowerShell, run the Windows Deployment Image and Service Manager (DISM) tool as an administrator to enable the Windows Subsystem for Linux. To run PowerShell with administrator privileges, right-click on the PowerShell icon from the Start menu or desktop and select “*Run as administrator*”.
+From within PowerShell, run the Windows Deployment Image and Service Manager (DISM) tool to enable the Windows Subsystem for Linux. To run PowerShell with administrator privileges, right-click on the PowerShell icon from the Start menu or desktop and select “*Run as administrator*”.
 
 ```
 PS C:\WINDOWS\System32> dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
@@ -67,7 +68,7 @@ After enabling the Virtual Machine Platform support, **restart your machine**.
 
 ### Step 3: Download the Linux Kernel Update Package
 
-Nextflow users will want to take advantage of the latest features in WSL 2. You can learn about differences between WSL 1 and WSL 2 [here](https://docs.microsoft.com/en-us/windows/wsl/compare-versions). Before you can enable support for WSL 2, you’ll need to download the kernel update package at the link below:
+Nextflow users will want to take advantage of the latest features in WSL 2. You can learn about differences between WSL 1 and WSL 2 [here](https://docs.microsoft.com/en-us/windows/wsl/compare-versions). Before enabling support for WSL 2, you’ll need to download the kernel update package at the link below:
 
 [WSL2 Linux kernel update package for x64 machines](https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi)
 
@@ -100,7 +101,7 @@ If you normally install Linux on VM environments such as VirtualBox or VMware, t
   $ sudo apt update && sudo apt upgrade
   ```
 
-* This is also a good time to add any additional Linux packages that you will want to use. 
+* This is a good time to add any additional Linux packages that you will want to use. 
 
 	```
 	$ sudo apt install net-tools
@@ -108,7 +109,7 @@ If you normally install Linux on VM environments such as VirtualBox or VMware, t
 
 ## Install Windows Terminal
 
-While not necessary, it is a good idea to install [Windows Terminal](https://github.com/microsoft/terminal) at this point. When working with Nextflow, it is handy to interact with multiple command lines at the same time. For example, users may want to execute flows, monitor logfiles, and run Docker commands in separate windows.
+While not necessary, it is a good idea to install [Windows Terminal](https://github.com/microsoft/terminal) at this point. When working with Nextflow, it is handy to interact with multiple command lines at the same time. For example, users may want to execute flows, monitor log files, and run Docker commands in separate windows.
 
 Windows Terminal provides an X-Windows-like experience on Windows. It helps organize your various command-line environments - Linux shell, Windows Command  Prompt, PowerShell, AWS or Azure CLIs.
 
@@ -118,7 +119,7 @@ Instructions for downloading and installing Windows Terminal are available at: h
 
 It is worth spending a few minutes getting familiar with available commands and shortcuts in Windows Terminal. Documentation is available at https://docs.microsoft.com/en-us/windows/terminal/command-line-arguments.
 
-Some Windows Terminal commands you’ll need right away are provided below:
+Some Windows Terminal commands you will need right away are provided below:
 
 * Split the active window vertically:  **SHIFT ALT =**
 * Split the active window horizontally: **SHIFT ALT –**
@@ -129,7 +130,7 @@ Some Windows Terminal commands you’ll need right away are provided below:
 
 There are two ways to install Docker for use with the WSL on Windows. One method is to install Docker directly on a hosted WSL Linux instance (Ubuntu in our case) and have the docker daemon run on the Linux kernel as usual. An installation recipe for people that choose this “native Linux” approach is provided [here](https://dev.to/bowmanjd/install-docker-on-windows-wsl-without-docker-desktop-34m9).
 
-A second method is to run [Docker Desktop](https://www.docker.com/products/docker-desktop) on Windows. While Docker is more commonly used in Linux environments, it can be used with Windows also. The Docker Desktop supports containers running on Windows and Linux instances running under WSL. Docker Desktop provides some advantages for Windows users:
+A second method is to run [Docker Desktop](https://www.docker.com/products/docker-desktop) on Windows. While Docker is more common in Linux environments, it can be used with Windows also. The Docker Desktop supports containers running on Windows and Linux instances running under WSL. Docker Desktop provides some advantages for Windows users:
 
 * The installation process is automated
 * Docker Desktop provides a Windows GUI for managing Docker containers and images (including Linux containers running under WSL)
@@ -161,9 +162,9 @@ The Docker Engineering team provides an architecture diagram explaining how Dock
 
 ### Step 2: Verify the Docker installation
 
-Now that Docker is installed, run a Docker container to verify that Docker and the Docker Integration Package on WSL 2 are working properly. 
+With Docker installed, run a Docker container to verify that Docker and the Docker Integration Package on WSL 2 are working properly. 
 
-* Run a Docker command from the Linux shell as shown below below. This command downloads a **centos** image from Docker Hub and allows us to interact with the container via an assigned pseudo-tty. Your Docker container may exit with exit code 139 when you run this and other Docker containers. If so, don’t worry – an easy fix to this issue is provided shortly.
+* Run a Docker command from the Linux shell as shown below. This command downloads a **centos** image from Docker Hub and allows us to interact with the container via an assigned pseudo-tty. Your Docker container may exit with exit code 139 when you run this and other Docker containers. If so, don’t worry – an easy fix to this issue is provided shortly.
 
 	```
 	$ docker run -ti centos:6
@@ -411,7 +412,7 @@ process {
 
 # Configuring an XServer for the Nextflow Console
 
-Pipeline developers will probably want to use the Nextflow Console at some point. The Nextflow Console’s REPL (read-eval-print loop) environment allows developers to quickly test parts of scripts or Nextflow code segments interactively.
+Pipeline developers will probably want to use the Nextflow Console at some point. The Nextflow Console’s REPL (read-eval-print loop) environment allows developers to test parts of scripts or Nextflow code segments interactively.
 
 The Nextflow Console is launched from the Linux command line. However, the Groovy-based interface requires an X-Windows environment to run. You can set up X-Windows with WSL using the procedure below. A good article on this same topic is provided [here](https://medium.com/javarevisited/using-wsl-2-with-x-server-linux-on-windows-a372263533c3).
 
@@ -481,9 +482,9 @@ The Nextflow Console is launched from the Linux command line. However, the Groov
 	$ sudo apt install xterm
 	```
 
-* Assuming that the X-server is up and running on Windows, and the Linux DISPLAY variable is set correctly, you’re ready to test X-Windows.
+* Assuming that the X-server is up and running on Windows, and the Linux DISPLAY variable is set correctly, you are ready to test X-Windows.
 
-  Before testing X-Windows, do yourself a favor and temporarily disable the Windows Firewall. The Windows Firewall will very likely block ports around 6000, preventing client requests on WSL from connecting to the X-server. You can find this under Firewall & network protection on Windows. Clicking the “Private Network” or “Public Network” options will show you the status of the Windows Firewall and indicate whether it is on or off.
+  Before testing X-Windows, do yourself a favor, and temporarily disable the Windows Firewall. The Windows Firewall will likely block ports around 6000, preventing client requests on WSL from connecting to the X-server. You can find this under Firewall & network protection on Windows. Clicking the “Private Network” or “Public Network” options will show you the status of the Windows Firewall and indicate whether it is on or off.
 
   Depending on your installation, you may be running a specific Firewall. In this example, we temporarily disable the McAfee LiveSafe Firewall as shown:
 
@@ -503,12 +504,13 @@ The Nextflow Console is launched from the Linux command line. However, the Groov
 
 	<img src="./images/xterm.png" alt="Launch an xterm to verify functionality" style="zoom:80%;" />
 
-* Now that you know X-Windows is working correctly turn the Firewall back on, and adjust the settings to allow traffic to and from the required port. Ideally, you want to open only the minimal set of ports and services required.
-In the case of the McAfee Firewall, getting X-Windows to work required changing access to incoming and outgoing ports to “Open ports to Work and Home networks” for the vcxsrv.exe program only as shown:
+* Now that X-Windows is working correctly, turn the Firewall back on, and adjust the settings to allow traffic to and from the required port. Ideally, you should open only the minimal set of ports and services required.
+
+  In the case of the McAfee Firewall, getting X-Windows to work required changing access to incoming and outgoing ports to “Open ports to Work and Home networks” for the vcxsrv.exe program only as shown:
 
 <img src="./images/xserver_setup.png" alt="Allowing access to XServer traffic" style="zoom: 67%;" />
 
-* With the X-server running, the DISPLAY variable set, and the Windows Firewall configured correctly, we can now launch the Nextflow Console from the shell as shown:
+* With the X-server running, the DISPLAY variable set, and the Windows Firewall configured correctly, we can launch the Nextflow Console from the shell as shown:
 
 	```
 	$ nextflow console
@@ -527,15 +529,15 @@ Inside the Nextflow console, you can enter Groovy code and run it interactively,
 
 Collaborative source code management systems such as BitBucket, GitHub, and GitLab are used to develop and share Nextflow pipelines. To be productive with Nextflow, you will want to install Git. 
 
-As explained earlier, VS Code operates in different contexts. When running VS Code in the context of Windows, VS Code will look for a local copy of Git. When using VS Code to operate against the remote WSL environment, a separate installation of Git installed on Ubuntu will be used. (Note that Git is installed by default on Ubuntu 20.04)
+As explained earlier, VS Code operates in different contexts. When running VS Code in the context of Windows, VS Code will look for a local copy of Git. When operating against the remote WSL environment, a separate installation of Git installed on Ubuntu will be used. (Note that Git is installed by default on Ubuntu 20.04)
 
-Developers will probably want to use Git both from within a Windows context and a Linux context, so we need to make sure that Git is present in both environments.
+Developers may want to use Git both from within Windows and Linux, so we need to make sure that Git is present in both environments.
 
 ### Step 1: Install Git on Windows (optional)
 
 * Download the install the 64-bit Windows version of Git from https://git-scm.com/downloads. 
 
-* Click on the Git installer from the Downloads directory, and click through the default installation options. During the install process, you will be asked to select the default editor to be used with Git. (VIM, Notepad++, etc.). Select Visual Studio Code (assuming that this is the IDE that you plan to use for Nextflow).
+* Click on the Git installer from the Downloads directory, and click through the default installation options. During the install process, you will be prompted to select the default editor to be used with Git. (VIM, Notepad++, etc.). Select Visual Studio Code (assuming that this is the IDE you plan to use for Nextflow).
 
   
 
@@ -543,7 +545,7 @@ Developers will probably want to use Git both from within a Windows context and 
 
 
 
-* The Git installer will prompt you for additional settings. If you are not sure, accept the defaults. When asked, adjust the PATH variable to use the recommended option, making the Git command line available from Git Bash, the Command Prompt, and PowerShell.
+* The Git installer will prompt you for additional settings. If you are unsure, accept the defaults. When asked, adjust the PATH variable to use the recommended option, making the Git command line available from Git Bash, the Command Prompt, and PowerShell.
 
 * After installation Git Bash, Git GUI, and GIT CMD will appear as new entries under the Start menu. If you are running Git from PowerShell, you will need to open a new Windows to force PowerShell to reset the path variable. By default, Git installs in C:\Program Files\Git.
 
@@ -591,3 +593,15 @@ Developers will probably want to use Git both from within a Windows context and 
 * Git commands are available from within VS Code by selecting the *Source Control* icon on the left panel and selecting the three dots (…) to the right of SOURCE CONTROL. Some operations such as pushing or committing code will require that VS Code be authenticated with your GitHub credentials.
 
   <img src="./images/git-linux-4.png" alt="Using Git within VS Code" style="zoom:80%;" />
+
+
+
+# Summary
+
+With WSL2, Windows 10 is an excellent environment for developing and testing Nextflow pipelines. Users can take advantage of the power and convenience of a Linux command line environment while using Windows-based IDEs such as VS-Code with full support for containers.
+
+Pipelines developed in the Windows environment can easily be extended to compute environments in the cloud.
+
+While installing Nextflow itself is straightforward, installing and testing necessary components such as WSL, Docker, an IDE, and Git can be a little tricky. Hopefully readers will find this guide helpful.
+
+ 
